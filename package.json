@@ -1,0 +1,9 @@
+{
+  "name": "typescript_learning",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
