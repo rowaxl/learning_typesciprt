@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "fmt": "prettier --write index.ts"
+  },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "prettier": "^1.19.1"
   }
 }
