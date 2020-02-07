@@ -19,6 +19,7 @@ class TODO implements ITodo {
   public id: number
   public title: string
   public completed: boolean
+
   public printTodo = () => {
     console.log(`
       id: ${this.id}
@@ -43,3 +44,12 @@ const getFunc: () => Promise<ITodo> = async () => {
 
   res.printTodo()
 })()
+
+let lazyInit: number | boolean = false;
+
+for (let i = 0; i < 3; i++) {
+  console.log(`inside forloop ${lazyInit}`)
+  lazyInit = i
+}
+
+console.log(`outside of loop ${lazyInit}`)
