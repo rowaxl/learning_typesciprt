@@ -28,8 +28,18 @@ class TODO implements ITodo {
   }
 }
 
-axios.get("https://jsonplaceholder.typicode.com/todos/1").then(res => {
-  const todo = new TODO(res.data)
+const getFunc: () => Promise<ITodo> = async () => {
+  const startTime = Date.now()
+  console.log("start")
+  const res = await axios.get("https://jsonplaceholder.typicode.com/todos/1")
 
-  todo.printTodo()
-})
+  const endTime = Date.now()
+  console.log("done during: %d ms", endTime - startTime)
+  return res.data
+}
+
+(async () => {
+  const res = new TODO(await getFunc())
+
+  res.printTodo()
+})()
