@@ -1,5 +1,6 @@
 import axios from "axios"
 
+// interfaces
 interface ITodo {
   userId: number
   id: number
@@ -7,6 +8,7 @@ interface ITodo {
   completed: boolean
 }
 
+// class implements interfaces
 class TODO implements ITodo {
   constructor(todo: ITodo) {
     this.userId = todo.userId
@@ -29,6 +31,7 @@ class TODO implements ITodo {
   }
 }
 
+// simple ajax pattern
 const getFunc: () => Promise<ITodo> = async () => {
   const startTime = Date.now()
   console.log("start")
@@ -39,12 +42,15 @@ const getFunc: () => Promise<ITodo> = async () => {
   return res.data
 }
 
+// IIFE
 (async () => {
   const res = new TODO(await getFunc())
 
   res.printTodo()
 })()
 
+
+// Lazyinit pattern
 let lazyInit: number | boolean = false;
 
 for (let i = 0; i < 3; i++) {
@@ -53,3 +59,36 @@ for (let i = 0; i < 3; i++) {
 }
 
 console.log(`outside of loop ${lazyInit}`)
+
+// type inference with functions
+type addFunction = (a: number | string, b: number | string) => number | string
+
+const add:addFunction = (a, b) => {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a + b
+  }
+
+  return `${a}${b}`
+}
+
+console.log(`add 1 + 2 = ${add(1, 2)}`) // return 3
+console.log(`add 1 + 2 = ${add('1', 2)}`) // return 12
+console.log(`add 1 + 2 = ${add(1, '2')}`) // return 12
+console.log(`add 1 + 2 = ${add("1", '2')}`) // return 12
+// console.log(`add 1 + 2 = ${add(false, '2')}`) // compile error
+
+// object literals
+const obj = {
+  name: 'alex',
+  age: 20,
+  props: {
+    propA: 'a',
+    propB: 3
+  }
+}
+
+const { age }: { age: number } = obj
+
+// destructive
+const { props: { propA, propB } }: { props: { propA: string, propB: number } } = obj
+
