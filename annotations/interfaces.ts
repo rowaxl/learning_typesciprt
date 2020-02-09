@@ -98,17 +98,35 @@ interface IT2 {
 }
 
 class MImpl implements IT1, IT2 {
-  p1: 'I\'m IT1 props'
-  p2: 'howbout multiple implements?'
-  p3: 'I\'m IT2 props'
-  callSome() {
+  p1 = 'I\'m IT1 props'
+  p2 = 'howbout multiple implements?'
+  p3 = 'I\'m IT2 props'
+  public callSome():string {
     return (`
 p1: ${this.p1}
 p2: ${this.p2}
 p3: ${this.p3}
     `)
   }
+
+  // overload signatures
+  public printProp(str: string):string
+  public printProp(str: string, str2: string):string[] 
+
+  // overload implements
+  public printProp(str: string, str2?: string):string |string[] {
+    if (str2) {
+      return [str, str2, this.p2]
+    }
+
+    return str + this.p1
+  }
 }
+
+const impled = new MImpl()
+console.log(impled.printProp('hello '))
+console.log(impled.printProp('hello ', 'overloaded'))
+console.log(impled.callSome())
 
 // function overload pattern
 function overloadFunc(obj: IT1): void
