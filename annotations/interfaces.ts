@@ -86,3 +86,53 @@ exteded.num = 21491013284
 exteded.bool = false || true || true || false
 
 printSummary(exteded)
+
+interface IT1 {
+  p1: string
+  p2: string
+}
+
+interface IT2 {
+  p3: string
+  callSome(): string
+}
+
+class MImpl implements IT1, IT2 {
+  p1: 'I\'m IT1 props'
+  p2: 'howbout multiple implements?'
+  p3: 'I\'m IT2 props'
+  callSome() {
+    return (`
+p1: ${this.p1}
+p2: ${this.p2}
+p3: ${this.p3}
+    `)
+  }
+}
+
+// function overload pattern
+function overloadFunc(obj: IT1): void
+function overloadFunc(obj: IT2): string
+
+function overloadFunc(obj: IT1 | IT2): void | string {
+  if (Object(obj).hasOwnProperty('callSome')) {
+    return (obj as IT2).callSome()
+  }
+
+  console.log((obj as IT1).p1)
+  console.log((obj as IT1).p2)
+}
+
+const res1 = overloadFunc({
+  p1: 'I\'m IT1 props',
+  p2: 'run overload1 func'
+})
+
+console.log(res1)
+
+const res2 = overloadFunc({
+  p3: 'I\'m IT2 props',
+  callSome: () => `this is overload2 func`
+})
+
+console.log(res2)
