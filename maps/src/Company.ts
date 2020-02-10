@@ -1,6 +1,7 @@
 import { company, address } from 'faker'
+import { IMappable } from './IMapperble'
 
-export class Company {
+export class Company implements IMappable {
   public name: string
   public catchPhrase: string
   public location: {

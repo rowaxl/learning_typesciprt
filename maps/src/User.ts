@@ -1,6 +1,7 @@
 import { name, address } from 'faker'
+import { IMappable } from './IMapperble'
 
-export class User {
+export class User implements IMappable {
   public name: string
   public location: {
     lat: number
