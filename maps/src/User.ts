@@ -16,4 +16,11 @@ export class User implements IMappable {
       lng: parseFloat(address.latitude())
     }
   }
+
+  content = () => `
+<div>
+<h2>User</h2>
+<h3>${this.name}</h3>
+</div>
+`
 }

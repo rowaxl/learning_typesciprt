@@ -18,4 +18,12 @@ export class Company implements IMappable {
       lng: parseFloat(address.latitude())
     }
   }
+
+  content = () => `
+<div>
+<h2>Company</h2>
+<h3>${this.name}</h3>
+<p>${this.catchPhrase}</p>
+</div>
+`
 }

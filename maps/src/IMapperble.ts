@@ -4,4 +4,5 @@ export interface IMappable {
     lat: number
     lng: number
   }
+  content(): string
 }

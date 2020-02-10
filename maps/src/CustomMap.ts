@@ -18,13 +18,21 @@ export class CustomMap {
   }
 
   public addMarker(mappable: IMappable) {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       },
       label: mappable.name
+    })
+
+    marker.addListener('click', () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: mappable.content()
+      })
+
+      infoWindow.open(this.googleMap, marker)
     })
   }
 }
