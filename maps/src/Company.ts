@@ -2,6 +2,7 @@ import { company, address } from 'faker'
 
 export class Company {
   public name: string
+  public catchPhrase: string
   public location: {
     lat: number
     lng: number
@@ -9,6 +10,7 @@ export class Company {
 
   constructor() {
     this.name = company.companyName()
+    this.catchPhrase = company.catchPhrase()
 
     this.location = {
       lat: parseFloat(address.latitude()),
