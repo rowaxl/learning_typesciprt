@@ -1,6 +1,6 @@
-import { name, address } from 'faker'
+import { company, address } from 'faker'
 
-export class User {
+export class Company {
   public name: string
   public location: {
     lat: number
@@ -8,7 +8,7 @@ export class User {
   }
 
   constructor() {
-    this.name = name.findName()
+    this.name = company.companyName()
 
     this.location = {
       lat: parseFloat(address.latitude()),
