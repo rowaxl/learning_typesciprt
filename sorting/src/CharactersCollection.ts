@@ -2,11 +2,8 @@ import { ISortable } from './ISortable'
 import { Sorter } from './Sorter'
 
 export class CharactersCollection extends Sorter implements ISortable {
-  public data: string
-
-  constructor(data: string) {
+  constructor(public data: string) {
     super()
-    this.data = data
   }
 
   get length() {

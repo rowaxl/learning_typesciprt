@@ -24,7 +24,7 @@ var Node = /** @class */ (function () {
 var LinkedList = /** @class */ (function (_super) {
     __extends(LinkedList, _super);
     function LinkedList() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
         _this.head = null;
         return _this;
     }

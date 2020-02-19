@@ -4,7 +4,6 @@ import { Sorter } from './Sorter'
 export class NumberCollection extends Sorter implements ISortable {
   constructor(public data: number[]) {
     super()
-    this.data = data
   }
 
   get length(): number {

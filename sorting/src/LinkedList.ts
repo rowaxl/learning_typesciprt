@@ -10,6 +10,10 @@ class Node {
 export class LinkedList extends Sorter implements ISortable {
   public head: Node | null = null
 
+  constructor() {
+    super()
+  }
+
   get length() {
     if (!this.head) return 0
 

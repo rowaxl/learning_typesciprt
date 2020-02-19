@@ -19,7 +19,6 @@ var NumberCollection = /** @class */ (function (_super) {
     function NumberCollection(data) {
         var _this = _super.call(this) || this;
         _this.data = data;
-        _this.data = data;
         return _this;
     }
     Object.defineProperty(NumberCollection.prototype, "length", {
