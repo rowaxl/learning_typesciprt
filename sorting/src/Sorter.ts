@@ -1,9 +1,9 @@
-import { NumberCollection } from './NumberCollection'
+import { ISortable } from './ISortable'
 
 export class Sorter {
-  public collection: NumberCollection
+  public collection: ISortable
 
-  constructor(data: NumberCollection) {
+  constructor(data: ISortable) {
     this.collection = data
   }
 
@@ -17,13 +17,7 @@ export class Sorter {
         if (this.collection.compare(j, j + 1)) {
           this.collection.swap(j, j + 1)
         }
-
-        this.log()
       }
     }
-  }
-
-  log(): void {
-    console.log(this.collection.data)
   }
 }

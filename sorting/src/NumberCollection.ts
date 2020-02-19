@@ -1,4 +1,6 @@
-export class NumberCollection {
+import { ISortable } from './ISortable'
+
+export class NumberCollection implements ISortable {
   public data: number[]
 
   constructor(data: number[]) {

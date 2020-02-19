@@ -12,12 +12,8 @@ var Sorter = /** @class */ (function () {
                 if (this.collection.compare(j, j + 1)) {
                     this.collection.swap(j, j + 1);
                 }
-                this.log();
             }
         }
-    };
-    Sorter.prototype.log = function () {
-        console.log(this.collection.data);
     };
     return Sorter;
 }());
