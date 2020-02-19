@@ -2,6 +2,7 @@ import { ISortable } from './ISortable'
 
 export class CharactersCollection implements ISortable {
   public data: string
+
   constructor(data: string) {
     this.data = data
   }
