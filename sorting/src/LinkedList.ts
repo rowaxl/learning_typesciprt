@@ -1,4 +1,3 @@
-import { ISortable } from './ISortable'
 import { Sorter } from './Sorter'
 
 class Node {
@@ -7,7 +6,7 @@ class Node {
   constructor(public data: number) {}
 }
 
-export class LinkedList extends Sorter implements ISortable {
+export class LinkedList extends Sorter {
   public head: Node | null = null
 
   constructor() {
