@@ -2,10 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Sorter_1 = require("./Sorter");
 var NumberCollection_1 = require("./NumberCollection");
-var numCol = new NumberCollection_1.NumberCollection([0, -1, 2, 1]);
+var CharactersCollection_1 = require("./CharactersCollection");
+var initNums = [0, -1, 2, 1];
+var numCol = new NumberCollection_1.NumberCollection(initNums);
 var sortNum = new Sorter_1.Sorter(numCol);
 sortNum.simpleSort();
-console.log("after sort: " + numCol.data);
-// const sortStr = new Sorter('bbasXe2mlvsa')
-// sortStr.simpleSort()
-// sortStr.log()
+console.log("\nbefore: " + initNums + "\nafter: " + numCol.data + "\n");
+var initChar = 'bbasXe2mlvsa';
+var charCol = new CharactersCollection_1.CharactersCollection(initChar);
+var sortStr = new Sorter_1.Sorter(charCol);
+sortStr.simpleSort();
+console.log("\nbefore: " + initChar + "\nafter: " + charCol.data + "\n");
