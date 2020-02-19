@@ -1,21 +1,20 @@
 import { ISortable } from './ISortable'
 
-export class Sorter {
-  public collection: ISortable
+export abstract class Sorter implements ISortable {
+  abstract length: number
 
-  constructor(data: ISortable) {
-    this.collection = data
-  }
+  abstract compare(leftIndex: number, rightIndex:number): boolean
+  abstract swap(leftIndex: number, rightIndex:number): void
 
-  simpleSort(): void {
-    const { length } = this.collection
+  sort(): void {
+    const { length } = this
 
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length - i - 1; j++) {
 
         // If collections is number[]
-        if (this.collection.compare(j, j + 1)) {
-          this.collection.swap(j, j + 1)
+        if (this.compare(j, j + 1)) {
+          this.swap(j, j + 1)
         }
       }
     }

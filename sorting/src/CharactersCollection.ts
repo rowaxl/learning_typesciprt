@@ -1,9 +1,11 @@
 import { ISortable } from './ISortable'
+import { Sorter } from './Sorter'
 
-export class CharactersCollection implements ISortable {
+export class CharactersCollection extends Sorter implements ISortable {
   public data: string
 
   constructor(data: string) {
+    super()
     this.data = data
   }
 

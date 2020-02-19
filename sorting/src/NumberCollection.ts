@@ -1,9 +1,9 @@
 import { ISortable } from './ISortable'
+import { Sorter } from './Sorter'
 
-export class NumberCollection implements ISortable {
-  public data: number[]
-
-  constructor(data: number[]) {
+export class NumberCollection extends Sorter implements ISortable {
+  constructor(public data: number[]) {
+    super()
     this.data = data
   }
 

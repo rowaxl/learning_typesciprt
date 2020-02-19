@@ -1,4 +1,3 @@
-import { Sorter } from './Sorter'
 import { NumberCollection } from './NumberCollection'
 import { CharactersCollection } from './CharactersCollection'
 import { LinkedList } from './LinkedList'
@@ -8,17 +7,15 @@ console.log(`
 before: ${initNums}`)
 
 const numCol = new NumberCollection(initNums)
-const sortNum = new Sorter(numCol)
 
-sortNum.simpleSort()
+numCol.sort()
 console.log(`after: ${numCol.data}
 `)
 
 const initChar = 'bbasXe2mlvsa'
 const charCol = new CharactersCollection(initChar)
-const sortStr = new Sorter(charCol)
 
-sortStr.simpleSort()
+charCol.sort()
 console.log(`before: ${initChar}
 after: ${charCol.data}
 `)
@@ -33,8 +30,7 @@ linkedList.add(-10)
 console.log(`before sort`)
 linkedList.print()
 
-const sortLinkedList = new Sorter(linkedList)
-sortLinkedList.simpleSort()
+linkedList.sort()
 console.log(`
 after sort`)
 linkedList.print()
