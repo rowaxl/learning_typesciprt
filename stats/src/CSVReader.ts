@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 import { strToDate } from './utils'
 import { MatchResult } from './MatchResult'
-
+import { MatchData } from './MatchData'
 export class CSVReader {
-  public data: string[][] = []
+  public data: MatchData[] = []
 
   constructor(public filename: string) { }
 
@@ -15,7 +15,7 @@ export class CSVReader {
       .split('\n')
       .map((row: string): string[] =>
         row.split(',')
-      ).map((row: string[]): any => {
+      ).map((row: string[]): MatchData => {
         return [
           strToDate(row[0]).toDateString(),
           row[1],
