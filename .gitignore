@@ -4,3 +4,5 @@ yarn.lock
 .cache
 dist
 yarn-error.log
+
+asset/

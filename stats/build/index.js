@@ -11,5 +11,7 @@ var fs = __importStar(require("fs"));
 var assetPath = './asset/football.csv';
 var data = fs.readFileSync(assetPath, {
     encoding: 'UTF-8'
-});
+})
+    .split('\n')
+    .map(function (row) { return row.split(','); });
 console.log(data);
