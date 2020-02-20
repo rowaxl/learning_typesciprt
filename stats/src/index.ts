@@ -1,22 +1,17 @@
 import { CSVReader } from './CSVReader'
+import { MatchResult } from './MatchResult'
 
 const assetPath = './asset/football.csv'
 const csvReader = new CSVReader(assetPath)
 csvReader.read()
 const matches = csvReader.data
 
+console.log(matches)
 
 /**
  * e.g. [ '28/10/2018', 'Man United', 'Everton', '2', '1', 'H', 'J Moss' ]
  * date, home team, away team, , , which won, 
  */
-
-enum MatchResult {
-  HomeWin = 'H',
-  AwayWin = 'A',
-  Draw = 'D'
-}
-
 const teamName = 'Man United'
 
 let manUnitedWins = 0
