@@ -9,6 +9,7 @@
     "start": "concurrently yarn:start:*"
   },
   "dependencies": {
+    "@types/node": "^13.7.4",
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }
