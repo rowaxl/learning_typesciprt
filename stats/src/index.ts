@@ -1,11 +1,9 @@
-import * as fs from 'fs'
+import { CSVReader } from './CSVReader'
 
 const assetPath = './asset/football.csv'
-const matches = fs.readFileSync(assetPath, {
-  encoding: 'UTF-8'
-})
-  .split('\n')
-  .map((row: string):string[] => row.split(','))
+const csvReader = new CSVReader(assetPath)
+csvReader.read()
+const matches = csvReader.data
 
 
 /**
@@ -13,9 +11,9 @@ const matches = fs.readFileSync(assetPath, {
  * date, home team, away team, , , which won, 
  */
 
-enum WhichWin {
-  Home = 'H',
-  Away = 'A',
+enum MatchResult {
+  HomeWin = 'H',
+  AwayWin = 'A',
   Draw = 'D'
 }
 
@@ -24,9 +22,9 @@ const teamName = 'Man United'
 let manUnitedWins = 0
 
 for (let match of matches) {
-  if (match[1] === teamName && match[5] === WhichWin.Home) {
+  if (match[1] === teamName && match[5] === MatchResult.HomeWin) {
     manUnitedWins++
-  } else if (match[2] === teamName && match[5] === WhichWin.Away) {
+  } else if (match[2] === teamName && match[5] === MatchResult.AwayWin) {
     manUnitedWins++
   }
 }
