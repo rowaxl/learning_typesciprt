@@ -13,14 +13,20 @@ const matches = fs.readFileSync(assetPath, {
  * date, home team, away team, , , which won, 
  */
 
+enum WhichWin {
+  Home = 'H',
+  Away = 'A',
+  Draw = 'D'
+}
+
+const teamName = 'Man United'
+
 let manUnitedWins = 0
 
 for (let match of matches) {
-  if (match[1] === 'Man United' && match[5] === 'H') {
+  if (match[1] === teamName && match[5] === WhichWin.Home) {
     manUnitedWins++
-  }
-
-  if (match[2] === 'Man United' && match[5] === 'A') {
+  } else if (match[2] === teamName && match[5] === WhichWin.Away) {
     manUnitedWins++
   }
 }
