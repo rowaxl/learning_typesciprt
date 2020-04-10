@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 
-export abstract class CSVReader<DataType> {
-  public data: DataType[] = []
+export abstract class CSVReader<T> {
+  public data: T[] = []
 
   constructor(public filename: string) {}
 
-  abstract mapRow(row: string[]): DataType
+  abstract mapRow(row: string[]): T
 
   read() {
     this.data = fs
