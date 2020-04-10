@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSVReader_1 = require("./CSVReader");
+var MatchReader_1 = require("./MatchReader");
 var MatchResult_1 = require("./MatchResult");
 var assetPath = './asset/football.csv';
-var csvReader = new CSVReader_1.CSVReader(assetPath);
+var csvReader = new MatchReader_1.MatchReader(assetPath);
 csvReader.read();
 /**
  * e.g. [ '28/10/2018', 'Man United', 'Everton', '2', '1', 'H', 'J Moss' ]

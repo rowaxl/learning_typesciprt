@@ -1,8 +1,8 @@
-import { CSVReader } from './CSVReader'
+import { MatchReader } from './MatchReader'
 import { MatchResult } from './MatchResult'
 
 const assetPath = './asset/football.csv'
-const csvReader = new CSVReader(assetPath)
+const csvReader = new MatchReader(assetPath)
 csvReader.read()
 
 /**
