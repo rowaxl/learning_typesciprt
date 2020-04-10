@@ -1,32 +1,29 @@
 "use strict";
+// inheritence pattern
+// import { MatchReader } from './inheritence/MatchReader'
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSVReader_1 = require("./CSVReader");
-var MatchReader_1 = require("./MatchReader");
-var MatchResult_1 = require("./MatchResult");
+// interface composition pattern
+var CSVReader_1 = require("./composition/CSVReader");
+var MatchReader_1 = require("./composition/MatchReader");
+var Summary_1 = require("./Summary");
+var WinsAnalysis_1 = require("./analyzers/WinsAnalysis");
+var ConsoleReport_1 = require("./reportTargets/ConsoleReport");
+var HTMLReport_1 = require("./reportTargets/HTMLReport");
 var assetPath = './asset/football.csv';
 // inheritence pattern
 // const matchReader = new MatchReader(assetPath)
 // matchReader.read()
-// interface pattern
+// const matches = matchReader.data
+// composition pattern
 var matchReader = new MatchReader_1.MatchReader(new CSVReader_1.CSVReader(assetPath));
 matchReader.load();
+var matches = matchReader.matches;
 /**
  * e.g. [ '28/10/2018', 'Man United', 'Everton', '2', '1', 'H', 'J Moss' ]
  * date, home team, away team, , , which won,
  */
 var teamName = 'Man United';
-var manUnitedWins = 0;
-// inheritence pattern
-// const matches = matchReader.data
-// interface pattern
-var matches = matchReader.matches;
-for (var _i = 0, matches_1 = matches; _i < matches_1.length; _i++) {
-    var match = matches_1[_i];
-    if (match[1] === teamName && match[5] === MatchResult_1.MatchResult.HomeWin) {
-        manUnitedWins++;
-    }
-    else if (match[2] === teamName && match[5] === MatchResult_1.MatchResult.AwayWin) {
-        manUnitedWins++;
-    }
-}
-console.log("Man United wins " + manUnitedWins + " times");
+var consoleSummary = new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(teamName), new ConsoleReport_1.ConsoleReport());
+consoleSummary.buildAndPrintReport(matches);
+var htmlSummary = new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(teamName), new HTMLReport_1.HTMLReport());
+htmlSummary.buildAndPrintReport(matches);
