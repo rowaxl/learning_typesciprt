@@ -3,8 +3,8 @@ import { MatchData } from './MatchData'
 import { MatchResult } from './MatchResult'
 import { strToDate } from './utils'
 
-export class MatchReader extends CSVReader {
-  mapRow(row: string[]):MatchData {
+export class MatchReader extends CSVReader<MatchData> {
+  mapRow(row: string[]): MatchData {
     return [
       strToDate(row[0]).toDateString(),
       row[1],
