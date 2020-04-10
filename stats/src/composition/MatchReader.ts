@@ -1,10 +1,15 @@
 import { DataReader } from './DataReader'
+import { CSVReader } from './CSVReader'
+
 import { MatchResult } from '../MatchResult'
 import { strToDate } from '../utils'
 import { MatchData } from '../MatchData'
 
-
 export class MatchReader {
+  static fromCSV(fileName: string): MatchReader {
+    return new MatchReader(new CSVReader(fileName))
+  }
+
   public matches: MatchData[] = []
 
   constructor(public reader: DataReader) { }
