@@ -1,9 +1,20 @@
-import { CSVReader } from './CSVReader'
+// inheritence pattern
+// import { MatchReader } from './inheritence/MatchReader'
+
+// interface composition pattern
+import { CSVReader } from './composition/CSVReader'
+import { MatchReader } from './composition/MatchReader'
 import { MatchResult } from './MatchResult'
 
 const assetPath = './asset/football.csv'
-const csvReader = new CSVReader(assetPath)
-csvReader.read()
+
+// inheritence pattern
+// const matchReader = new MatchReader(assetPath)
+// matchReader.read()
+
+// interface pattern
+const matchReader = new MatchReader(new CSVReader(assetPath))
+matchReader.load()
 
 /**
  * e.g. [ '28/10/2018', 'Man United', 'Everton', '2', '1', 'H', 'J Moss' ]
@@ -13,7 +24,13 @@ const teamName = 'Man United'
 
 let manUnitedWins = 0
 
-for (let match of csvReader.data) {
+// inheritence pattern
+// const matches = matchReader.data
+
+// interface pattern
+const matches = matchReader.matches
+
+for (let match of matches) {
   if (match[1] === teamName && match[5] === MatchResult.HomeWin) {
     manUnitedWins++
   } else if (match[2] === teamName && match[5] === MatchResult.AwayWin) {

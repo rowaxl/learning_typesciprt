@@ -8,7 +8,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = __importStar(require("fs"));
-var utils_1 = require("./utils");
 var CSVReader = /** @class */ (function () {
     function CSVReader(filename) {
         this.filename = filename;
@@ -22,16 +21,6 @@ var CSVReader = /** @class */ (function () {
             .split('\n')
             .map(function (row) {
             return row.split(',');
-        }).map(function (row) {
-            return [
-                utils_1.strToDate(row[0]).toDateString(),
-                row[1],
-                row[2],
-                parseInt(row[3]),
-                parseInt(row[4]),
-                row[5],
-                row[6]
-            ];
         });
     };
     return CSVReader;
