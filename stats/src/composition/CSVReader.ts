@@ -1,6 +1,7 @@
 import * as fs from 'fs'
+import { DataReader } from './DataReader'
 
-export class CSVReader {
+export class CSVReader implements DataReader {
   public data: string[][] = []
 
   constructor(public filename: string) {}

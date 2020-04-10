@@ -1,11 +1,8 @@
-import { MatchResult } from './MatchResult'
-import { strToDate } from './utils'
-import { MatchData } from './MatchData'
+import { DataReader } from './DataReader'
+import { MatchResult } from '../MatchResult'
+import { strToDate } from '../utils'
+import { MatchData } from '../MatchData'
 
-interface DataReader {
-  read(): void
-  data: string[][]
-}
 
 export class MatchReader {
   public matches: MatchData[] = []

@@ -1,5 +1,9 @@
-import { CSVReader } from './CSVReader'
-import { MatchReader } from './MatchReader'
+// inheritence pattern
+// import { MatchReader } from './inheritence/MatchReader'
+
+// interface composition pattern
+import { CSVReader } from './composition/CSVReader'
+import { MatchReader } from './composition/MatchReader'
 import { MatchResult } from './MatchResult'
 
 const assetPath = './asset/football.csv'
