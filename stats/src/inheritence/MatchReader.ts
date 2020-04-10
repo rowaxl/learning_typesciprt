@@ -1,7 +1,7 @@
 import { CSVReader } from './CSVReader'
-import { MatchData } from './MatchData'
-import { MatchResult } from './MatchResult'
-import { strToDate } from './utils'
+import { MatchData } from '../MatchData'
+import { MatchResult } from '../MatchResult'
+import { strToDate } from '../utils'
 
 export class MatchReader extends CSVReader<MatchData> {
   mapRow(row: string[]): MatchData {
