@@ -6,7 +6,6 @@ interface IUserProp {
   id?: number
   name?: string
   age?: number
-  valid: boolean
 }
 
 const rootUrl = 'http://localhost:3000/users'
@@ -14,7 +13,7 @@ const rootUrl = 'http://localhost:3000/users'
 export class User {
   public events: Eventing = new Eventing()
   public sync: Sync<IUserProp> = new Sync(rootUrl)
-  public attr: Attributes<IUserProp> = new Attributes(this.data)
+  public attrs: Attributes<IUserProp> = new Attributes(this.data)
 
   // integration option #1: events to arg of constructor
   // constructor(private data, private event)
