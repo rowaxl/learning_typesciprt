@@ -1,16 +1,20 @@
-import axios, { AxiosResponse } from 'axios'
 import { Eventing } from './Eventing'
+import { Sync } from './Sync'
+import { Attributes } from './Attributes'
 
 interface IUserProp {
   id?: number
   name?: string
   age?: number
+  valid: boolean
 }
 
-type TUserProp = 'id'| 'name'| 'age'
+const rootUrl = 'http://localhost:3000/users'
 
 export class User {
   public events: Eventing = new Eventing()
+  public sync: Sync<IUserProp> = new Sync(rootUrl)
+  public attr: Attributes<IUserProp> = new Attributes(this.data)
 
   // integration option #1: events to arg of constructor
   // constructor(private data, private event)
@@ -24,30 +28,5 @@ export class User {
    * }
    * constructor(event)
   */ 
-  constructor(private data: IUserProp) { }
-
-  get(prop: TUserProp): (string|number) {
-    return this.data[prop]
-  }
-
-  set(updates: IUserProp): void {
-    Object.assign(this.data, updates)
-  }
-
-  fetch(): void {
-    axios.get(`http://localhost:3000/users/${this.get('id')}`)
-      .then((res: AxiosResponse): void => {
-        this.set(res.data)
-      })
-  }
-
-  save(): void {
-    const id = this.get('id')
-
-    if (id) {
-      axios.put(`http://localhost:3000/users/${this.get('id')}`, this.data)
-    } else {
-      axios.post('http://localhost:3000/users', this.data)
-    }
-  }
+  constructor(private data: IUserProp) {}
 }
