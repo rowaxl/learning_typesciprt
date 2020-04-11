@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { Eventing } from './Eventing'
 
 interface IUserProp {
   id?: number
@@ -6,41 +7,31 @@ interface IUserProp {
   age?: number
 }
 
-type Callback = () => void
+type TUserProp = 'id'| 'name'| 'age'
 
 export class User {
-  // events have many keys, and various number of callbacks
-  private events: { [key: string]: Callback[] } = {}
+  public events: Eventing = new Eventing()
 
+  // integration option #1: events to arg of constructor
+  // constructor(private data, private event)
+
+  // integration option #2: only get args of event and set props later
+  /**
+   * static fromData(data) { 
+   *  const user = new User(new Eventing());
+   *  user.set(data)
+   *  return user
+   * }
+   * constructor(event)
+  */ 
   constructor(private data: IUserProp) { }
 
-  get(prop: 'id'| 'name'| 'age'): (string|number) {
+  get(prop: TUserProp): (string|number) {
     return this.data[prop]
   }
 
   set(updates: IUserProp): void {
     Object.assign(this.data, updates)
-  }
-
-  on(eventName: string, callback: Callback): void {
-    // this.events[eventName] should be Callback[] or undefined
-    const handlers = this.events[eventName] || []
-
-    // assign new callback and update events
-    handlers.push(callback)
-    this.events[eventName] = handlers
-  }
-
-  trigger(eventName: string): void {
-    const handlers = this.events[eventName]
-
-    // if theres no handler in events, do nothing
-    if (!handlers || handlers.length === 0) return
-
-    // execute all handler
-    handlers.forEach((callback: Callback) => {
-      callback()
-    })
   }
 
   fetch(): void {
