@@ -1,4 +1,7 @@
+import axios, { AxiosResponse } from 'axios'
+
 interface IUserProp {
+  id?: number
   name?: string
   age?: number
 }
@@ -11,7 +14,7 @@ export class User {
 
   constructor(private data: IUserProp) { }
 
-  get(prop: 'name'| 'age'): (string|number) {
+  get(prop: 'id'| 'name'| 'age'): (string|number) {
     return this.data[prop]
   }
 
@@ -38,5 +41,22 @@ export class User {
     handlers.forEach((callback: Callback) => {
       callback()
     })
+  }
+
+  fetch(): void {
+    axios.get(`http://localhost:3000/users/${this.get('id')}`)
+      .then((res: AxiosResponse): void => {
+        this.set(res.data)
+      })
+  }
+
+  save(): void {
+    const id = this.get('id')
+
+    if (id) {
+      axios.put(`http://localhost:3000/users/${this.get('id')}`, this.data)
+    } else {
+      axios.post('http://localhost:3000/users', this.data)
+    }
   }
 }
