@@ -15,10 +15,10 @@ export class User {
   public sync: Sync<IUserProp> = new Sync(rootUrl)
   public attrs: Attributes<IUserProp> = new Attributes(this.data)
 
-  // integration option #1: events to arg of constructor
-  // constructor(private data, private event)
+  // Eventing integration option #1: events to arg of constructor
+  // constructor(private data, public event) {}
 
-  // integration option #2: only get args of event and set props later
+  // Eventing integration option #2: only get args of event and set props later
   /**
    * static fromData(data) { 
    *  const user = new User(new Eventing());
