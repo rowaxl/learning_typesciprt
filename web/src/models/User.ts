@@ -2,7 +2,7 @@ import { Eventing } from './Eventing'
 import { Sync } from './Sync'
 import { Attributes } from './Attributes'
 
-interface IUserProp {
+interface UserProps {
   id?: number
   name?: string
   age?: number
@@ -12,8 +12,8 @@ const rootUrl = 'http://localhost:3000/users'
 
 export class User {
   public events: Eventing = new Eventing()
-  public sync: Sync<IUserProp> = new Sync(rootUrl)
-  public attrs: Attributes<IUserProp> = new Attributes(this.data)
+  public sync: Sync<UserProps> = new Sync(rootUrl)
+  public attributes: Attributes<UserProps> // lazy init
 
   // Eventing integration option #1: events to arg of constructor
   // constructor(private data, public event) {}
@@ -26,6 +26,8 @@ export class User {
    *  return user
    * }
    * constructor(event)
-  */ 
-  constructor(private data: IUserProp) {}
+  */
+  constructor(attrs: UserProps) {
+    this.attributes = new Attributes<UserProps>(attrs)
+  }
 }
