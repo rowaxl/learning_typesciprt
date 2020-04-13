@@ -1,5 +1,17 @@
 import { User } from './models/User'
 
-const user = new User({ name: 'Niki', age: 23 })
+const user = new User({ id: 1 })
 
-console.log(user.get('name'))
+user.on('change', () => {
+  console.log('user changed', user.attributes)
+})
+
+user.on('saved', () => {
+  console.log('user saved', user.attributes)
+})
+
+// user.fetch()
+
+user.set({ name: 'David Web', age: 35 })
+
+user.save()

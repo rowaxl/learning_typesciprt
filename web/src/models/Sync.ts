@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
 interface HasID {
   id?: number
@@ -7,20 +7,17 @@ interface HasID {
 export class Sync<T extends HasID> {
   constructor(public rootUrl: string) { }
 
-  fetch = (id: number): void => {
-    axios.get(`${this.rootUrl}/${id}}`)
-      .then((res: AxiosResponse): void => {
-        return res.data
-      })
+  fetch = (id: number): AxiosPromise => {
+    return axios.get(`${this.rootUrl}/${id}`)
   }
 
-  save = (data: T): void => {
+  save = (data: T): AxiosPromise => {
     const { id } = data
 
     if (id) {
-      axios.put(`${this.rootUrl}/${id}}`, data)
+      return axios.put(`${this.rootUrl}/${id}`, data)
     } else {
-      axios.post(this.rootUrl, data)
+      return axios.post(this.rootUrl, data)
     }
   }
 }
