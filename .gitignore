@@ -7,5 +7,5 @@ yarn-error.log
 
 asset/
 build/
-db.json
+database.json
 

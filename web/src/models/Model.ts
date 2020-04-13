@@ -56,7 +56,6 @@ export class Model<T extends HasID> {
   }
 
   save = (): void => {
-    console.log(this.attributes.getAll())
     this.sync.save(this.attributes.getAll())
       .then((res: AxiosResponse) => {
         this.events.trigger('saved')
