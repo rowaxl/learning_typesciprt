@@ -30,4 +30,17 @@ export class User {
   constructor(attrs: UserProps) {
     this.attributes = new Attributes<UserProps>(attrs)
   }
+
+  // directly delegated from composed subclasses
+  get get() {
+    return this.attributes.get
+  }
+
+  get on() {
+    return this.events.on
+  }
+
+  get trigger() {
+    return this.events.trigger
+  }
 }
