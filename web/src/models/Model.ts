@@ -26,17 +26,9 @@ export class Model<T extends HasID> {
   ) { }
 
   // directly delegated from composed subclasses
-  get get() {
-    return this.attributes.get
-  }
-
-  get on() {
-    return this.events.on
-  }
-
-  get trigger() {
-    return this.events.trigger
-  }
+  public get = this.attributes.get
+  public on = this.events.on
+  public trigger = this.events.trigger
 
   set(updates: T): void {
     this.attributes.set(updates)

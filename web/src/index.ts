@@ -1,12 +1,9 @@
-import { User } from './models/User'
+import { Collection } from './models/Collection'
 
-const user1 = User.buildUser({ id: 1 })
-const user2 = User.buildUser({ name: 'Michael', age: 30 })
+const collection = new Collection('http://localhost:3000/users')
 
-user2.on('change', () => {
-  console.log('changed')
+collection.on('change', () => {
+  console.log(collection.models)
 })
 
-user2.set({ age: 31 })
-
-user2.save()
+collection.fetch()
