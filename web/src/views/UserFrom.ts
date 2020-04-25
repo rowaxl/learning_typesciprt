@@ -4,17 +4,30 @@ export class UserForm {
   constructor(
     public parent: Element,
     public model: User
-  ) { }
+  ) {
+    this.bindModel()
+  }
+
+  bindModel = (): void => {
+    this.model.on('change', () => {
+      this.render()
+    })
+  }
 
   // mappping like react onClick function
   private eventsMap(): { [key:string]: () => void } {
     return {
-      'click:button': this.onButtonClick
+      'click:.button-save': this.onSaveButtonClick,
+      'click:.button-set-age': this.onSetAgeClick
     }
   }
 
-  public onButtonClick(): void {
+  public onSaveButtonClick = (): void => {
     console.log('clicked!')
+  }
+
+  public onSetAgeClick = (): void =>  {
+    this.model.setRandomAge()
   }
 
   private template(): string {
@@ -22,10 +35,11 @@ export class UserForm {
       <div>
         <h1>User Form</h1>
 
-        <div>User Name: ${this.model.get('name')}</div>
-        <div>User Age : ${this.model.get('age')}</div>
+        <div class="user_name">User Name: ${this.model.get('name')}</div>
+        <div class="user_age">User Age : ${this.model.get('age')}</div>
         <input type="text" />
-        <button>Click</button>
+        <button class="button-set-age">Set Random Age</button>
+        <button class="button-save">Save</button>
       </div>
     `
   }
