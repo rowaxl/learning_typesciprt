@@ -17,7 +17,7 @@ export class UserShow extends View<User, UserProps> {
   template(): string {
     return `
       <div>
-        <h1>User Form</h1>
+        <h1>User Detail</h1>
         <div class="user-name">User Name: ${this.model.get('name')}</div>
         <div class="user-age">User Age : ${this.model.get('age')}</div>
       </div>
