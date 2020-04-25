@@ -17,13 +17,18 @@ export class UserForm {
   // mappping like react onClick function
   private eventsMap(): { [key:string]: () => void } {
     return {
-      'click:.button-save': this.onSaveButtonClick,
+      'click:.button-set-name': this.onSetNameClick,
       'click:.button-set-age': this.onSetAgeClick
     }
   }
 
-  public onSaveButtonClick = (): void => {
-    console.log('clicked!')
+  public onSetNameClick = (): void => {
+    const input = this.parent.querySelector('#input-user-name')
+
+    if (input) {
+      this.model.set({ name: (input as HTMLInputElement).value })
+    }
+
   }
 
   public onSetAgeClick = (): void =>  {
@@ -35,9 +40,10 @@ export class UserForm {
       <div>
         <h1>User Form</h1>
 
-        <div class="user_name">User Name: ${this.model.get('name')}</div>
-        <div class="user_age">User Age : ${this.model.get('age')}</div>
-        <input type="text" />
+        <div class="user-name">User Name: ${this.model.get('name')}</div>
+        <div class="user-age">User Age : ${this.model.get('age')}</div>
+        <input id="input-user-name" type="text" />
+        <button class="button-set-name">Set Name</button>
         <button class="button-set-age">Set Random Age</button>
         <button class="button-save">Save</button>
       </div>
@@ -60,6 +66,9 @@ export class UserForm {
 
   // parse string to HTML and insert event
   public render(): void {
+    // empty parent element
+    this.parent.innerHTML = '';
+
     // create html element and rendering template
     const templateElement = document.createElement('template')
     templateElement.innerHTML = this.template()

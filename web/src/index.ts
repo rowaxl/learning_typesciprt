@@ -8,4 +8,6 @@ if (rootElement) {
   const userForm = new UserForm(rootElement, user)
 
   userForm.render()
+} else {
+  throw new Error('Root element not found')
 }
