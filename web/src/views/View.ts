@@ -2,10 +2,12 @@ import { Model } from '../models/Model'
 
 // option: export abstract class View<T extends Model<K>, K>
 // and child extends View<User, UserProps>
-export abstract class View<T> {
+export abstract class View<T extends Model<K>, K> {
+  public regions: { [key: string]: Element } = {}
+
   constructor(
     public parent: Element,
-    public model: Model<T>,
+    public model: T,
   ) {
     this.bindModel()
   }
@@ -17,7 +19,24 @@ export abstract class View<T> {
   }
 
   abstract template(): string
-  abstract eventsMap(): { [key:string]: () => void }
+  eventsMap(): { [key: string]: () => void } {
+    return {}
+  }
+
+  public regionsMap = (): { [key: string]: string } => { return {} }
+
+  public mapRegions = (fragment: DocumentFragment): void => {
+    const regionsMap = this.regionsMap()
+
+    for (let key in regionsMap) {
+      const selector = regionsMap[key]
+      const element = fragment.querySelector(selector)
+
+      if (element) {
+        this.regions[key] = element
+      }
+    }
+  }
 
   // find all element inside in fragemnt and mapping events.
   private bindEvents(fragment: DocumentFragment): void {
@@ -33,6 +52,8 @@ export abstract class View<T> {
     }
   }
 
+  beforeRender(): void {}
+
   // parse string to HTML and insert event
   public render(): void {
     // empty parent element
@@ -43,6 +64,9 @@ export abstract class View<T> {
     templateElement.innerHTML = this.template()
 
     this.bindEvents(templateElement.content)
+    this.mapRegions(templateElement.content)
+
+    this.beforeRender()
 
     // append to parent to show
     this.parent.append(templateElement.content)

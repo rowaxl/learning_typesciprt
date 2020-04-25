@@ -2,7 +2,7 @@ import { UserProps } from '../interfaces'
 import { User } from '../models/User'
 import { View } from './View'
 
-export class UserForm extends View<UserProps> {
+export class UserForm extends View<User, UserProps> {
   constructor(
     public parent: Element,
     public model: User
@@ -11,10 +11,11 @@ export class UserForm extends View<UserProps> {
   }
 
   // mappping like react onClick function
-  eventsMap(): { [key:string]: () => void } {
+  eventsMap = (): { [key:string]: () => void } => {
     return {
       'click:.button-set-name': this.onSetNameClick,
-      'click:.button-set-age': this.onSetAgeClick
+      'click:.button-set-age': this.onSetAgeClick,
+      'click:.button-save': this.onSaveClick,
     }
   }
 
@@ -31,14 +32,14 @@ export class UserForm extends View<UserProps> {
     this.model.setRandomAge()
   }
 
+  public onSaveClick = (): void => {
+    this.model.save()
+  }
+
   template(): string {
     return `
       <div>
-        <h1>User Form</h1>
-
-        <div class="user-name">User Name: ${this.model.get('name')}</div>
-        <div class="user-age">User Age : ${this.model.get('age')}</div>
-        <input id="input-user-name" type="text" />
+        <input id="input-user-name" autocomplete="off" placeholder="${this.model.get('name')}" />
         <button class="button-set-name">Set Name</button>
         <button class="button-set-age">Set Random Age</button>
         <button class="button-save">Save</button>
