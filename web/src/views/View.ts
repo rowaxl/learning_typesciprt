@@ -1,5 +1,7 @@
 import { Model } from '../models/Model'
 
+// option: export abstract class View<T extends Model<K>, K>
+// and child extends View<User, UserProps>
 export abstract class View<T> {
   constructor(
     public parent: Element,
