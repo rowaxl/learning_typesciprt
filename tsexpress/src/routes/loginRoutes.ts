@@ -33,7 +33,32 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
     return
   }
 
-  res.send(`${email.toUpperCase()}`)
+  if (email === 'some@email.com' && password === 'password') {
+    // set loggined flag into session
+    req.session = { loggedIn: true }
+    // redirect to /
+    res.redirect('/')
+  } else {
+    res.status(422).send('Invalid email or password')
+  }
+})
+
+router.get('/', (req: Request, res: Response) => {
+  if (req.session && req.session.loggedIn) {
+    res.send(`
+      <div>
+        <h1>You are logged in</h1>
+        <a href="/logout">Logout</a>
+      </div>
+    `)
+  } else {
+    res.send(`
+      <div>
+        <h1>You have to login</h1>
+        <a href="/login">Login</a>
+      </div>
+    `)
+  }
 })
 
 export { router }
