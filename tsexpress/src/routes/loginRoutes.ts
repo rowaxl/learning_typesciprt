@@ -1,5 +1,9 @@
 import { Router, Request, Response } from 'express'
 
+export interface RequestWithBody extends Request {
+  body: { [key:string]: string | undefined }
+}
+
 const router = Router()
 
 router.get('/login', (req: Request, res: Response) => {
@@ -20,8 +24,16 @@ router.get('/login', (req: Request, res: Response) => {
   `)
 })
 
-router.post('/login', (req: Request, res: Response) => {
-  console.log(req.body)
+router.post('/login', (req: RequestWithBody, res: Response) => {
+  const { email, password } = req.body
+
+  if (!email || !password)
+  {
+    res.status(403).send('You need to POST /login with email and password')
+    return
+  }
+
+  res.send(`${email.toUpperCase()}`)
 })
 
 export { router }
