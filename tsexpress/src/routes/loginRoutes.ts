@@ -20,4 +20,8 @@ router.get('/login', (req: Request, res: Response) => {
   `)
 })
 
+router.post('/login', (req: Request, res: Response) => {
+  console.log(req.body)
+})
+
 export { router }
